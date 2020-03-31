@@ -41,4 +41,8 @@ public class BowlingFrame {
   public int getRoll2() {
     return this.roll2;
   }
+
+  public int getNum() {
+    return this.num;
+  }
 }
