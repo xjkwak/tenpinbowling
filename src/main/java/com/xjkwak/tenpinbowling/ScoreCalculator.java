@@ -1,5 +1,7 @@
 package com.xjkwak.tenpinbowling;
 
+import java.util.List;
+
 public class ScoreCalculator {
 
   public void calculate(Player player) {
@@ -25,6 +27,12 @@ public class ScoreCalculator {
         score += next.getRoll1();
       }
       current.setScore(score);
+    }
+  }
+
+  public void calculate(List<Player> players) {
+    for (Player player: players) {
+      this.calculate(player);
     }
   }
 }
