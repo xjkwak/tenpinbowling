@@ -1,11 +1,20 @@
-package com.xjkwak.tenpinbowling;
+package com.xjkwak.tenpinbowling.reader;
+
+import com.xjkwak.tenpinbowling.Player;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.*;
 
-public class PlayersReader {
+public class PlayersReader implements IPlayersReader {
 
+  private Scanner scanner;
+
+  public PlayersReader(String filePath) throws FileNotFoundException {
+    scanner = new Scanner(new FileReader(filePath));
+  }
+
+  @Override
   public List<Player> getPlayers(String filePath) {
 
     List<Player> players;
@@ -14,20 +23,13 @@ public class PlayersReader {
 
     Player previous = null;
 
-    try (Scanner scanner = new Scanner(new FileReader(filePath))) {
-      while (scanner.hasNext()) {
-        previous = processLine(playerMap, previous, scanner);
-      }
-
-
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
+    while (scanner.hasNext()) {
+      previous = processLine(playerMap, previous, scanner);
     }
 
     players = new ArrayList<>(playerMap.values());
 
     return players;
-
   }
 
   private Player processLine(Map<String, Player> playerMap, Player previous, Scanner scanner) {
